@@ -1,18 +1,740 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>First Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>让干宠物的人先富起来！</title>
+  <!-- Font Awesome 5 图标库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* ========== 全局样式 ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      /* 淡蓝色渐变背景 — 动态流动基底 */
+      background: linear-gradient(145deg, 
+        #d4e9ff 0%, 
+        #b5d4f0 25%, 
+        #c2defa 50%, 
+        #aac9ec 75%, 
+        #d0e7ff 100%);
+      background-size: 200% 200%;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      transition: background-position 0.1s ease;
+    }
+
+    /* 配色变量 */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #0f2b4b;
+      --gray-light: #f0f7ff;
+      --gray-mid: rgba(255, 255, 255, 0.5);
+      --gray-text: #1e3a5f;
+      --shadow-sm: 0 15px 30px -12px rgba(0, 40, 80, 0.2);
+      --shadow-hover: 0 25px 35px -12px rgba(37, 99, 235, 0.25);
+      --border-radius-card: 28px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* 每个区域 — 珠光质感 */
+    .section {
+      padding: 80px 0;
+      position: relative;
+      z-index: 1;
+      background-color: rgba(255, 255, 255, 0.4);
+      background-image: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.6) 0%, transparent 60%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 255, 240, 0.4) 0%, transparent 60%);
+      background-blend-mode: overlay;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+      margin-bottom: 2px;
+      box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.3);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      color: var(--secondary);
+      text-align: center;
+      text-shadow: 0 2px 10px rgba(255,255,255,0.8);
+    }
+
+    .section-subhead {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #1e3a5f;
+      max-width: 700px;
+      margin: 0 auto 56px auto;
+      font-weight: 400;
+      text-shadow: 0 1px 6px rgba(255,255,255,0.5);
+    }
+
+    #about, #platform, #project, #contact {
+      scroll-margin-top: 85px;
+    }
+
+    /* ========== 导航栏 ========== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(255, 255, 255, 0.5);
+      background-image: linear-gradient(120deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.5) 100%);
+      box-shadow: 0 4px 20px rgba(0, 30, 60, 0.1), inset 0 1px 4px rgba(255,255,255,0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .navbar .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color:#1296db
+    }
+
+    .logo svg path {
+      fill: currentColor;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 28px;
+      list-style: none;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--secondary);
+      font-size: 1.1rem;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+      text-shadow: 0 1px 4px rgba(255,255,255,0.5);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    /* ========== HERO 区域 ========== */
+    .hero {
+      padding: 60px 0 80px 0;
+      background-color: transparent;
+    }
+
+    .hero .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 900px;
+      margin-bottom: 24px;
+      color: var(--secondary);
+      text-shadow: 0 4px 15px rgba(255,255,255,0.7);
+    }
+
+    .hero .highlight {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: #0f2b4b;
+      max-width: 700px;
+      margin-bottom: 36px;
+      text-shadow: 0 2px 8px rgba(255,255,255,0.5);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 38px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: 0.25s;
+      border: 1px solid transparent;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255,255,255,0.3);
+    }
+
+    .btn-primary {
+      background-color: rgba(37, 99, 235, 0.85);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px -5px rgba(37,99,235,0.4);
+    }
+
+    .btn-outline {
+      background-color: rgba(255,255,255,0.4);
+      border-color: rgba(255,255,255,0.9);
+      color: var(--secondary);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* ========== 关于区域 (图文并茂) ========== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    .about-text p {
+      color: #0f2b4b;
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 30px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: inset 0 2px 8px rgba(255,255,255,0.6), 0 10px 20px -10px rgba(0,40,80,0.2);
+    }
+
+    /* 新增：右侧图片样式 (与联系我们的图片风格统一) */
+    .about-image {
+      width: 100%;
+    }
+    .about-photo {
+      width: 100%;
+      border-radius: 30px;
+      border: 2px solid rgba(255,255,255,0.8);
+      box-shadow: 0 20px 30px -10px rgba(0,30,60,0.3);
+      transition: transform 0.3s ease;
+    }
+    .about-photo:hover {
+      transform: scale(1.02);
+    }
+
+    /* ========== 平台 / 项目卡片 ========== */
+    .service-grid, .services-grid {
+      display: grid;
+      gap: 30px;
+    }
+
+    .service-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    @media (min-width: 1100px) {
+      .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.55);
+      padding: 40px 25px 35px;
+      border-radius: var(--border-radius-card);
+      box-shadow: var(--shadow-sm), inset 0 0 30px rgba(255, 255, 255, 0.8);
+      text-align: center;
+      transition: 0.25s;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      background-image: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.9) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(255,250,210,0.5) 0%, transparent 60%);
+      background-blend-mode: overlay;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      background-color: rgba(255, 255, 255, 0.75);
+      border-color: var(--primary);
+      box-shadow: 0 25px 35px -12px rgba(37,99,235,0.3), inset 0 0 40px white;
+    }
+
+    .service-icon {
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 25px;
+      filter: drop-shadow(0 5px 10px rgba(255,255,255,0.8));
+    }
+
+    .service-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+      color: #0f2b4b;
+    }
+
+    .service-card p {
+      color: #1e3a5f;
+      margin-bottom: 20px; /* 为图片留出间距 */
+    }
+
+    /* 卡片内图片样式 */
+    .card-image {
+      margin-top: 15px;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.6);
+      box-shadow: 0 8px 20px -6px rgba(0,30,60,0.2);
+      transition: transform 0.3s ease;
+    }
+    .card-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .card-image:hover img {
+      transform: scale(1.05);
+    }
+
+    /* ========== 联系我们 ========== */
+    #contact {
+      background-color: rgba(200, 220, 245, 0.45);
+      background-image: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.7) 0%, transparent 60%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 250, 210, 0.5) 0%, transparent 60%);
+      background-blend-mode: overlay;
+      color: #0f2b4b;
+    }
+
+    #contact .section-title,
+    #contact .section-subhead {
+      color: #0f2b4b;
+      text-shadow: 0 2px 10px white;
+    }
+
+    #contact .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 40px;
+      padding: 50px 45px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: inset 0 0 40px rgba(255,255,255,0.5), 0 10px 30px -10px rgba(0,30,60,0.2);
+    }
+
+    #contact .info-icon {
+      background: rgba(255, 255, 255, 0.4);
+      color: var(--primary);
+    }
+
+    #contact .info-text a {
+      color: #0f2b4b;
+      text-decoration: underline wavy rgba(37,99,235,0.5);
+    }
+
+    #contact .social-links a {
+      color: #0f2b4b;
+      opacity: 0.8;
+    }
+
+    .contact-info h3, .contact-image h3 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      font-weight: 600;
+      color: #0f2b4b;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 35px;
+    }
+
+    .info-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      background: rgba(255,255,255,0.5);
+      box-shadow: inset 0 2px 6px white;
+    }
+
+    .info-text p:first-child {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 25px;
+      margin-top: 30px;
+      font-size: 1.8rem;
+    }
+
+    .contact-image .company-photo {
+      width: 100%;
+      border-radius: 30px;
+      border: 2px solid rgba(255,255,255,0.8);
+      box-shadow: 0 20px 30px -10px rgba(0,30,60,0.3);
+      transition: transform 0.3s ease;
+    }
+    .company-photo:hover {
+      transform: scale(1.02);
+    }
+
+    /* 页脚 */
+    .footer {
+      background-color: rgba(255, 255, 255, 0.3);
+      background-image: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 100%);
+      color: #0f2b4b;
+      padding: 35px 0;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.8);
+      box-shadow: inset 0 8px 20px rgba(255,255,255,0.5);
+    }
+    .footer a {
+      color: #0f2b4b;
+      font-weight: 500;
+    }
+
+    /* 移动端适应 */
+    @media (max-width: 800px) {
+      .about-grid, #contact .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .section {
+        padding: 60px 0;
+      }
+    }
+
+    /* 鼠标拖尾 canvas (黑色半透明) */
+    #magic-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <h2>This is my first page</h2>
-    <script src="main.js"></script>
+  <!-- 黑色半透明拖尾 canvas -->
+  <canvas id="magic-canvas"></canvas>
+
+  <!-- 导航栏 -->
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">
+     <svg t="1772589052303" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1839" width="60" height="60"><path d="M824.188109 794.084091a428.359681 428.359681 0 0 1-34.99001 34.475142 45.623611 45.623611 0 0 0 60.176512 68.582521 517.431847 517.431847 0 0 0 42.50288-41.872429 45.623611 45.623611 0 0 0-67.689382-61.185234z" p-id="1840" fill="#1296db"></path><path d="M511.999464 0C229.683672 0 0 229.683672 0 511.999464s229.683672 511.999464 511.999464 511.999464a508.34285 508.34285 0 0 0 204.360572-42.429327 45.616255 45.616255 0 1 0-36.440047-83.639784 417.93623 417.93623 0 0 1-167.920525 34.82189c-232.005832 0-420.752243-188.746411-420.752243-420.752243S279.993632 91.247221 511.999464 91.247221 932.751707 279.993632 932.751707 511.999464a416.706851 416.706851 0 0 1-40.979291 181.359631 45.623611 45.623611 0 1 0 82.30533 39.392657 507.229054 507.229054 0 0 0 49.921182-220.752288C1023.998928 229.683672 794.315256 0 511.999464 0z" p-id="1841" fill="#1296db"></path><path d="M412.608922 806.524983c2.301145 0 4.623305 0 6.934957-0.16812a1831.879381 1831.879381 0 0 1 186.077504-0.147105 132.78341 132.78341 0 0 0 113.680756-54.323829 131.343881 131.343881 0 0 0 17.368915-123.725936C705.484762 544.572747 661.626414 473.888724 606.314878 418.209425c-51.150561-51.486801-132.583767-53.146988-185.3735-3.730166-60.565291 56.740557-104.623282 127.140877-134.674762 215.403965a133.319293 133.319293 0 0 0 126.342306 176.641759z m-54.355352-152.127737c25.922028-76.116406 63.433841-136.440024 114.668463-184.427824a56.278226 56.278226 0 0 1 38.636116-15.330458 57.392022 57.392022 0 0 1 40.821678 17.158765c47.630545 47.956278 85.709763 109.551304 113.02929 182.92525a54.765145 54.765145 0 0 1-7.47084 52.25385c-11.558262 15.761266-29.284432 24.419454-48.523683 23.295151a1935.021104 1935.021104 0 0 0-193.779509 0.12609 57.27644 57.27644 0 0 1-57.392022-76.000824zM234.653724 377.50333c-30.377213 0-52.201312 48.628759-52.201312 79.005971a54.99631 54.99631 0 1 0 109.99262 0c0-30.366705-27.372065-79.005971-57.791308-79.005971zM431.543456 317.431892c0-30.377213-24.629605-72.817048-54.99631-72.817048s-54.99631 42.439835-54.99631 72.817048a54.99631 54.99631 0 0 0 109.99262 0zM686.098406 317.431892c0-30.377213-24.629605-69.496674-54.99631-69.496674s-55.006817 39.119462-55.006818 69.496674a54.99631 54.99631 0 1 0 109.99262 0zM841.536008 472.869495c0-30.366705-24.619097-81.233564-54.99631-81.233564s-54.99631 50.866858-54.99631 81.233564a54.99631 54.99631 0 0 0 109.99262 0z" p-id="1842" fill="#1296db"></path></svg>
+        <span>中宠汇</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">首页</a></li>
+        <li><a href="#about">企业介绍</a></li>
+        <li><a href="#platform">平台介绍</a></li>
+        <li><a href="#project">项目运营</a></li>
+        <li><a href="#contact">联系我们</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO 区域 -->
+    <section id="home" class="hero">
+      <div class="container">
+        <h1>构建<span class="highlight">智能未来</span><br>以创新驱动商业价值</h1>
+        <p>我们提供前瞻性的技术解决方案，助力企业数字化转型，从战略到落地，全程陪跑。</p>
+        <div class="btn-group">
+          <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane" style="margin-right: 8px;"></i>开启合作</a>
+          <a href="#about" class="btn btn-outline"><i class="fas fa-chevron-circle-down" style="margin-right: 8px;"></i>了解更多</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关于我们 (右侧已添加图片) -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">关于我们</h2>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>中宠汇联合国内外最高学术水平专家团队，链接国内外优质产业资源，在上海打造全国首个以宠物人才、技术、资本、产业等要素集聚的国际化、数字化宠物产业高地，助力探索“宠物+”多产业融合模式。</p>
+          </div>
+          <!-- 右侧图片区域，请将 src 替换为您的实际图片相对路径，例如 images/about.jpg -->
+          <div class="about-image">
+            <img src="C:\Users\HP\Desktop\新建文件夹\fw.png" alt="关于我们形象图" class="about-photo">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 平台介绍 (三卡片，每卡片下方添加图片) -->
+    <section id="platform" class="section">
+      <div class="container">
+        <h2 class="section-title">我们的平台</h2>
+        <div class="service-grid">
+          <div class="service-card">
+            <div class="service-icon"><svg t="1772445109088" viewBox="0 0 1024 1024" width="60" height="60"><path d="M922.9 200.9H485.8v-23.6c0-43.6-35.4-79-79-79h-84.1c-43.6 0-79 35.4-79 79v23.6h-142c-14.5 0-26.3 11.8-26.3 26.3s11.8 26.3 26.3 26.3h142v7.8c0 43.6 35.4 79 79 79h84.1c43.6 0 79-35.4 79-79v-7.8h437.1c14.5 0 26.3-11.8 26.3-26.3s-11.8-26.3-26.3-26.3z m-489.8 60.4c0 14.5-11.8 26.3-26.3 26.3h-84.1c-14.5 0-26.3-11.8-26.3-26.3v-84.1c0-14.5 11.8-26.3 26.3-26.3h84.1c14.5 0 26.3 11.8 26.3 26.3v84.1zM922.9 780.8H485.8v-15.7c0-43.6-35.4-79-79-79h-84.1c-43.6 0-79 35.4-79 79v15.7h-142c-14.5 0-26.3 11.8-26.3 26.3s11.8 26.3 26.3 26.3h142v15.7c0 43.6 35.4 79 79 79h84.1c43.6 0 79-35.4 79-79v-15.7h437.1c14.5 0 26.3-11.8 26.3-26.3s-11.8-26.3-26.3-26.3z m-489.8 68.4c0 14.5-11.8 26.3-26.3 26.3h-84.1c-14.5 0-26.3-11.8-26.3-26.3v-84.1c0-14.5 11.8-26.3 26.3-26.3h84.1c14.5 0 26.3 11.8 26.3 26.3v84.1z" fill="#1296db"></path><path d="M922.9 482.7H789.2V467c0-43.6-35.4-79-79-79h-84.1c-43.6 0-79 35.4-79 79v15.7H101.6c-14.5 0-26.3 11.8-26.3 26.3s11.8 26.3 26.3 26.3h445.5V551c0 43.6 35.4 79 79 79h84.1c43.6 0 79-35.4 79-79v-15.7h133.7c14.5 0 26.3-11.8 26.3-26.3s-11.8-26.3-26.3-26.3z m-186.4 68.4c0 14.5-11.8 26.3-26.3 26.3h-84.1c-14.5 0-26.3-11.8-26.3-26.3V467c0-14.5 11.8-26.3 26.3-26.3h84.1c14.5 0 26.3 11.8 26.3 26.3v84.1z" fill="#1296db" opacity=".5"></path></svg></div>
+            <h3>产业链</h3>
+            <p>产业基地辐射长三角与京津冀打造具有全球资源配置能力的宠物经济总部区</p>
+            <!-- 添加图片 -->
+            <div class="card-image">
+              <img src="C:\Users\HP\Desktop\新建文件夹\产业链.png" alt="产业链示意图">
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><svg t="1772445058569" viewBox="0 0 1024 1024" width="60" height="60"><path d="M434.56 1011.328c1.664-15.488 2.752-29.056 4.608-42.368 3.136-23.232 6.912-46.336 10.304-69.504 1.664-11.584 2.752-23.296 4.096-34.944l7.168-53.632c1.344-10.368 2.752-20.864 3.84-31.296 1.664-15.616 2.752-31.232 4.48-46.848 0.896-8.32 2.624-16.64 3.456-24.96 1.792-17.216-5.312-32.64-9.92-48.64-1.472-5.696-3.712-11.392-4.48-17.088-0.192-1.856 3.456-5.952 5.248-5.952 33.472-0.384 66.816-0.256 100.16-0.256 4.8 0 6.592 1.152 4.8 6.528-3.776 11.264-6.656 22.72-9.792 34.048-1.28 4.544-2.88 9.152-3.648 13.824-2.624 15.872-0.32 31.552 2.944 47.36 2.368 11.136 3.2 22.592 4.224 33.92 1.472 16.64 2.368 33.216 4.416 49.664 3.072 24.128 6.912 48.128 10.24 72.192 1.6 10.752 2.944 21.504 3.968 32.256 1.6 16.192 2.816 32.512 4.416 48.64 0.896 9.984 2.24 19.84 3.84 29.568 0.256 1.92 2.752 3.456 5.824 6.912 4.672-17.92 8.448-33.28 12.736-48.576 4.288-15.68 9.152-31.104 13.632-46.72 3.136-10.88 5.76-21.952 8.576-32.832 3.392-11.904 6.912-23.68 10.112-35.648 3.072-10.88 5.568-21.824 8.64-32.704 3.2-11.712 6.656-23.296 9.92-35.008 2.88-10.752 5.76-21.76 8.768-32.512 3.328-12.288 6.912-24.384 10.24-36.736 3.008-11.136 5.504-22.4 8.576-33.6 3.2-11.648 6.784-23.232 10.048-34.752 3.008-10.624 5.568-21.312 8.512-31.936 1.28-4.864 1.344-11.328 4.48-14.016 3.84-3.2 11.328-5.12 15.68-3.648 20.16 7.168 39.744 16 59.648 23.744 20.608 8 41.408 15.488 62.08 23.296 16.384 6.272 32.768 12.608 49.024 19.072 21.056 8.384 41.088 18.304 59.456 31.68 16.512 12.032 29.504 26.88 36.928 45.44 3.328 8.256 3.2 17.728 4.16 26.752 1.6 16.448 2.496 33.088 4.224 49.6 2.048 19.456 4.672 38.848 6.912 58.304l0.256 2.688c1.472 19.712 2.816 39.232 4.416 58.816 1.088 13.568 2.176 27.136 3.968 40.512 2.816 21.696-20.544 44.16-43.712 44.032-126.912-1.152-253.824-0.832-380.8-0.832-178.24 0-356.544 0.128-534.912 0.576-15.808 0-29.504-3.392-38.336-16-10.624-15.36-11.968-32.896-7.744-50.688 0.448-1.792 1.344-3.456 1.344-5.184 1.6-19.328 2.688-38.656 4.544-57.92 1.728-16.448 4.48-32.768 6.592-49.152l0.32-2.688c1.408-19.264 1.216-38.912 4.8-57.792 3.456-18.368 0.512-37.888 13.056-55.04 12.608-16.832 27.52-30.72 44.992-41.728 26.624-16.96 56.896-26.176 86.272-37.312 23.168-8.896 45.952-18.56 68.992-27.84 19.392-7.68 38.976-15.36 58.56-22.464 9.088-3.392 17.344 2.816 19.456 12.16 2.752 11.968 6.848 23.808 10.112 35.776 2.944 10.88 5.44 21.824 8.448 32.768 3.2 11.968 6.912 23.744 10.24 35.776 2.816 10.56 5.44 21.184 8.384 31.808 4.608 16.832 9.472 33.472 14.08 50.368 3.008 10.56 5.568 21.12 8.32 31.68 3.456 12.352 7.04 24.448 10.432 36.736 2.944 10.88 5.44 21.888 8.448 32.832 3.264 11.904 6.848 23.68 10.112 35.648 3.008 10.944 5.76 21.888 8.576 32.896 3.84 15.104 7.68 30.336 11.904 45.44 0.448 1.92 3.328 2.944 6.4 5.504zM276.48 260.608c3.52-19.264 7.616-43.136 12.416-66.944 5.504-28.288 18.304-53.76 33.856-77.824 22.4-35.2 53.76-63.872 90.88-83.008 17.024-8.832 34.944-16 54.208-18.944 14.336-2.112 28.608-5.76 42.88-5.888 14.912-0.128 30.016 2.368 44.672 5.312 13.76 2.752 27.584 6.656 40.512 11.968a226.688 226.688 0 0 1 91.2 67.84c18.048 22.272 32.32 46.336 42.688 72.384 5.952 14.976 8.96 31.232 12.288 47.104 2.88 14.336 6.336 29.056 6.208 43.52-0.64 20.16-2.56 40.256-5.824 60.16-1.6 11.712-4.992 23.104-7.68 34.688-5.12 22.08-14.912 42.304-25.408 62.336a277.76 277.76 0 0 1-72.064 87.488 202.24 202.24 0 0 1-65.728 36.096c-21.504 6.976-43.392 11.776-65.92 10.304a200.192 200.192 0 0 1-100.416-34.368c-26.752-18.112-50.112-39.808-67.456-66.88a512.192 512.192 0 0 1-33.152-58.24c-8-17.152-13.312-35.712-18.56-53.952-2.816-9.216-3.264-19.008-4.48-28.48-1.6-13.248-3.072-26.368-5.12-44.672z" fill="#1296db"></path></svg></div>
+            <h3>人才链</h3>
+            <p>宠物专业人才培训与官方考评打造可复制、可推广的理论教学 + 实操实训 + 职业认证人才平台</p>
+            <!-- 添加图片 -->
+            <div class="card-image">
+              <img src="C:\Users\HP\Desktop\新建文件夹\人才链.png" alt="人才链示意图">
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><svg t="1772444982491" viewBox="0 0 1024 1024" width="60" height="60"><path d="M146.452 509.01c0 12.93 10.482 23.412 23.412 23.412s23.411-10.482 23.411-23.412-10.482-23.411-23.411-23.411c-12.93 0-23.412 10.482-23.412 23.411z" fill="#1296db"></path><path d="M169.865 534.825c-14.236 0-25.82-11.58-25.82-25.813 0-14.237 11.584-25.818 25.82-25.818 14.235 0 25.815 11.58 25.815 25.819 0 14.232-11.58 25.812-25.815 25.812z m0-46.824c-11.584 0-21.007 9.426-21.007 21.012 0 11.58 9.423 21.006 21.007 21.006 11.58 0 21.003-9.426 21.003-21.006 0-11.587-9.423-21.012-21.003-21.012zM489.381 90.726a23.411 23.411 0 1 0 46.823 0c0-12.93-10.481-23.411-23.411-23.411-12.93 0-23.412 10.481-23.412 23.411z" fill="#1296db"></path><path d="M512.792 116.542c-14.236 0-25.816-11.58-25.816-25.813 0-14.237 11.58-25.819 25.816-25.819 14.235 0 25.818 11.58 25.818 25.82 0 14.231-11.583 25.812-25.818 25.812z m0-46.824c-11.58 0-21.003 9.426-21.003 21.011 0 11.58 9.422 21.006 21.003 21.006 11.583 0 21.006-9.426 21.006-21.006 0-11.586-9.423-21.011-21.006-21.011zM163.834 314.844a23.411 23.411 0 1 0 46.823 0 23.411 23.411 0 0 0-46.823 0z" fill="#1296db"></path><path d="M187.246 340.66c-14.236 0-25.819-11.58-25.819-25.813 0-14.238 11.583-25.819 25.819-25.819 14.235 0 25.819 11.58 25.819 25.819 0 14.232-11.584 25.812-25.82 25.812z m0-46.826c-11.583 0-21.006 9.426-21.006 21.012 0 11.58 9.423 21.006 21.006 21.006s21.006-9.426 21.006-21.006c0-11.586-9.423-21.012-21.006-21.012zM817.008 314.844c0 12.93 10.482 23.411 23.412 23.411s23.411-10.481 23.411-23.411c0-12.93-10.481-23.412-23.411-23.412-12.93 0-23.412 10.482-23.412 23.412z" fill="#1296db"></path><path d="M840.42 340.66c-14.235 0-25.818-11.58-25.818-25.813 0-14.238 11.583-25.819 25.819-25.819 14.235 0 25.815 11.58 25.815 25.819 0 14.232-11.58 25.812-25.815 25.812z m0-46.826c-11.582 0-21.005 9.426-21.005 21.012 0 11.58 9.423 21.006 21.006 21.006 11.58 0 21.003-9.426 21.003-21.006 0-11.586-9.423-21.012-21.003-21.012zM288.33 153.762c0 12.93 10.482 23.412 23.412 23.412s23.411-10.482 23.411-23.412-10.482-23.411-23.411-23.411c-12.93 0-23.412 10.482-23.412 23.412z" fill="#1296db"></path><path d="M311.742 179.577c-14.236 0-25.82-11.58-25.82-25.812 0-14.238 11.584-25.82 25.82-25.82 14.235 0 25.815 11.581 25.815 25.82 0 14.232-11.58 25.812-25.815 25.812z m0-46.825c-11.584 0-21.007 9.426-21.007 21.012 0 11.58 9.423 21.006 21.007 21.006 11.58 0 21.003-9.426 21.003-21.006 0-11.586-9.423-21.012-21.003-21.012zM691.911 153.762c0 12.93 10.482 23.412 23.412 23.412s23.411-10.482 23.411-23.412-10.481-23.411-23.411-23.411c-12.93 0-23.412 10.482-23.412 23.412z" fill="#1296db"></path><path d="M715.323 179.577c-14.236 0-25.819-11.58-25.819-25.812 0-14.238 11.583-25.82 25.819-25.82 14.235 0 25.819 11.581 25.819 25.82 0 14.232-11.584 25.812-25.82 25.812z m0-46.825c-11.583 0-21.006 9.426-21.006 21.012 0 11.58 9.423 21.006 21.006 21.006s21.006-9.426 21.006-21.006c0-11.586-9.423-21.012-21.006-21.012zM829.211 509.01c0 12.93 10.482 23.412 23.412 23.412s23.411-10.482 23.411-23.412-10.481-23.411-23.411-23.411c-12.93 0-23.412 10.482-23.412 23.411z" fill="#1296db"></path><path d="M852.623 534.825c-14.236 0-25.819-11.58-25.819-25.813 0-14.237 11.584-25.818 25.819-25.818s25.819 11.58 25.819 25.819c-0.001 14.232-11.584 25.812-25.82 25.812z m0-46.824c-11.583 0-21.006 9.426-21.006 21.012 0 11.58 9.423 21.006 21.006 21.006s21.006-9.426 21.006-21.006c0-11.587-9.423-21.012-21.006-21.012z m-328.695-19.443h-117.14c-42.852 0-77.714-34.857-77.714-77.709 0-42.852 34.862-77.71 77.715-77.71 42.849 0 77.712 34.858 77.712 77.71 0 11.072-8.975 20.045-20.048 20.045-11.073 0-20.048-8.973-20.048-20.045 0-20.74-16.874-37.62-37.616-37.62-20.743 0-37.62 16.88-37.62 37.62s16.876 37.62 37.62 37.62h117.138c11.072 0 20.048 8.973 20.048 20.045 0 11.071-8.975 20.044-20.047 20.044z" fill="#1296db"></path><path d="M654.244 883.598c-1.784 0-3.56-0.238-5.28-0.707l-271.566-73.974a20.048 20.048 0 0 1-14.78-19.343v-91.39c-85.27-52.24-137.752-145.341-137.752-245.803 0-158.855 129.241-288.097 288.1-288.097 158.858 0 288.1 129.242 288.1 288.097 0 99.876-52.026 192.702-136.56 245.068v82.555c0 11.072-8.975 20.045-20.048 20.045-11.073 0-20.048-8.973-20.048-20.045v-93.986a20.046 20.046 0 0 1 10.2-17.46c77.941-43.962 126.36-126.793 126.36-216.178 0-136.75-111.255-248.007-248.005-248.007S264.96 315.63 264.96 452.38c0 89.909 48.842 172.978 127.463 216.797a20.035 20.035 0 0 1 10.29 17.508v87.572l256.787 69.947c10.682 2.912 16.984 13.928 14.075 24.614-2.431 8.917-10.515 14.779-19.332 14.779z" fill="#1296db"></path><path d="M464.915 677.476c-11.072 0-20.048-8.973-20.048-20.045V397.573c0-11.072 8.975-20.045 20.048-20.045 11.072 0 20.047 8.973 20.047 20.045V657.43c0 11.072-8.976 20.045-20.047 20.045z" fill="#1296db"></path><path d="M619.144 468.558h-117.14c-11.072 0-20.048-8.973-20.048-20.044 0-11.072 8.975-20.045 20.048-20.045h117.139c20.743 0 37.62-16.88 37.62-37.62s-16.877-37.62-37.62-37.62c-20.744 0-37.617 16.88-37.617 37.62 0 11.072-8.975 20.045-20.048 20.045-11.073 0-20.048-8.973-20.048-20.045 0-42.852 34.863-77.71 77.713-77.71 42.852 0 77.714 34.858 77.714 77.71s-34.861 77.71-77.713 77.71z" fill="#1296db"></path><path d="M561.017 677.476c-11.072 0-20.048-8.973-20.048-20.045V397.573c0-11.072 8.975-20.045 20.048-20.045 11.073 0 20.048 8.973 20.048 20.045V657.43c0 11.072-8.975 20.045-20.048 20.045z m92.55 279.075c-1.759 0-3.51-0.232-5.208-0.69l-271.914-72.953c-10.694-2.867-17.037-13.862-14.169-24.553 2.87-10.697 13.89-17.045 24.556-14.166l271.915 72.952c10.694 2.867 17.036 13.862 14.169 24.553-2.404 8.956-10.5 14.857-19.35 14.857z" fill="#1296db"></path></svg></div>
+            <h3>创新链</h3>
+            <p>上海市伴侣动物产业研究院（筹）打造全球性的宠物前沿技术创新策源、临床示范应用和产业发展高地</p>
+            <!-- 添加图片 -->
+            <div class="card-image">
+              <img src="C:\Users\HP\Desktop\新建文件夹\创新链.png" alt="创新链示意图">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 项目运营 四卡片，每卡片下方添加图片 -->
+    <section id="project" class="section">
+      <div class="container">
+        <h2 class="section-title">我们的项目</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon"><svg t="1772517326846" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2871" width="60" height="60"><path d="M884.769 798.898l-38.45-366.35c-6.725-63.56-66.926-113.362-137.21-113.362H678.01V245.75c0-91.093-74.07-165.159-165.051-165.159-91.093 0-165.056 74.066-165.056 165.052v73.44h-31.098c-70.285 0-130.485 49.797-137.21 113.464l-38.45 366.243c-4.202 40.24 8.3 79.956 34.356 108.95 26.054 28.893 62.405 44.862 102.537 44.862h469.73c40.137 0 76.488-15.97 102.542-44.861 26.158-28.995 38.768-68.603 34.459-108.843zM391.928 245.643c0-66.818 54.317-121.135 121.134-121.135 66.715 0 121.031 54.317 121.031 121.135v73.44H391.928v-73.44zM817.74 878.325c-17.545 19.54-42.339 30.256-69.866 30.256H278.038c-27.527 0-52.32-10.716-69.866-30.256-18.071-19.966-26.367-46.544-23.325-74.913l38.454-366.346c4.31-40.87 46.226-74.07 93.401-74.07H709.11c47.277 0 89.194 33.2 93.503 74.07l38.454 366.346c2.94 28.37-5.36 54.947-23.325 74.913zM622.433 711.273c-76.91 51.798-142.361 61.252-179.657 25.85a91.582 91.582 0 0 1-10.926-12.82c59.256-13.655 222.101-60.933 213.272-166.524-3.78-44.65-34.457-80.058-78.374-90.245-48.222-11.558-118.616 7.982-171.25 95.606-40.66 67.762-33.2 158.116 17.022 205.917 13.867 13.24 42.445 33.202 87.932 33.202 37.192 0 85.63-13.237 146.564-54.317 10.085-6.828 12.711-20.488 5.986-30.574-6.828-10.189-20.483-12.815-30.57-6.095zM433.112 585.83c34.457-57.256 75.538-77.324 107.478-77.324 5.673 0 11.029 0.63 16.072 1.784 25.32 5.885 42.342 25.533 44.548 51.059 5.464 65.561-126.391 108.428-185.961 121.453-5.674-31.309 0-67.342 17.863-96.972z m0 0" p-id="2872" fill="#1296db"></path></svg></div>
+            <h3>宠物跨境电商</h3>
+            <p>建立国际交流平台，打造全球数字化选品中心，构建便捷可靠的宠物商品跨境选购渠道。</p>
+            <!-- 添加图片 -->
+            <div class="card-image">
+              <img src="https://picsum.photos/300/200?random=4" alt="跨境电商示意图">
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><svg t="1772517438595" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3985" width="60" height="60"><path d="M806.76864 277.2992h-147.6608V182.80448c0-26.0096-22.15936-47.26784-49.21344-47.26784h-196.87424c-27.07456 0-49.23392 21.27872-49.23392 47.26784v94.49472h-147.6608c-54.14912 0-98.42688 42.51648-98.42688 94.5152v378.01984c0 51.99872 44.27776 94.49472 98.42688 94.49472h590.6432c54.12864 0 98.42688-42.496 98.42688-94.49472V371.8144c0-51.99872-44.29824-94.5152-98.42688-94.5152zM412.99968 182.80448h196.89472v94.49472h-196.89472V182.80448z m295.3216 425.2672h-147.6608v141.76256H462.2336v-141.76256h-147.6608v-94.49472h147.6608v-141.76256h98.42688v141.76256h147.6608v94.49472z" fill="#1296db" p-id="3986"></path></svg></div>
+            <h3>宠物智能药柜</h3>
+            <p>在宠物健康管理等功能上实现创新突破，打造革命性的宠物数字健康生态。</p>
+            <!-- 添加图片 -->
+            <div class="card-image">
+              <img src="https://picsum.photos/300/200?random=5" alt="智能药柜示意图">
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><svg t="1772517519435" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1385" width="60" height="60"><path d="M286.186667 189.162667l10.154666 284.565333c65.194667-77.909333 146.688-117.461333 243.413334-117.461333 118.421333 0 213.909333 59.242667 284.714666 175.488l44.181334-26.026667a21.333333 21.333333 0 0 1 32.042666 15.936l0.128 2.432v328.618667h-42.666666l-0.021334-291.285334-133.696 78.848-2.816-4.778666v217.216h-42.666666l-0.021334-291.285334-114.133333 67.285334 0.021333 208.981333a21.333333 21.333333 0 0 1-18.837333 21.184l-2.496 0.149333H377.6a21.333333 21.333333 0 0 1-21.333333-21.333333V621.909333a21.333333 21.333333 0 0 1 10.496-18.389333l165.888-97.792a21.333333 21.333333 0 0 1 32.170666 18.368v55.104l124.629334-73.472a21.333333 21.333333 0 0 1 32.042666 15.936l0.128 2.432v68.309333l66.090667-38.976c-63.317333-103.744-145.408-154.496-247.957333-154.496-98.837333 0-178.602667 47.146667-240.96 143.36l11.306666 316.736H131.498667l23.914666-669.866666h130.773334zM265.365333 802.133333h-89.173333l-0.490667 14.250667h90.176l-0.512-14.250667z m256.768-240.682666L398.933333 634.069333v182.293334h123.2v-254.933334z m-272.768-207.317334h-57.173333l-14.464 405.333334h86.122667l-14.506667-405.333334zM638.677333 658.773333v53.76h-42.666666v-53.76h42.666666z m179.2 0v53.76h-42.666666v-53.76h42.666666z m-336 0v53.76h-42.666666v-53.76h42.666666zM244.992 231.829333H196.586667l-2.837334 79.616h54.08l-2.837333-79.616z" fill="#1296db" p-id="1386"></path></svg></div>
+            <h3>宠物产业示范基地</h3>
+            <p>打造宠物文化教科研生活圈，实现创新策源地、资源引力场、品质金标准、趋势晴雨表。</p>
+            <!-- 添加图片 -->
+            <div class="card-image">
+              <img src="https://picsum.photos/300/200?random=6" alt="示范基地示意图">
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><svg t="1772517624601" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2724" width="60" height="60"><path d="M616.448 840.192c-7.168 0.512-14.336-0.512-20.48-3.072L404.48 759.296 231.424 875.52c-16.896 11.264-39.936 9.216-54.272-5.12-9.216-9.216-13.824-21.504-12.8-34.304l13.824-206.336c0-2.048-0.512-4.096-2.56-5.12L16.384 495.104c-12.8-10.24-18.944-27.136-15.36-43.52 3.072-16.384 15.872-29.184 31.744-33.28L230.4 367.616c2.048-0.512 3.584-2.048 4.096-3.584l71.168-194.048c7.68-22.528 32.256-34.304 54.784-26.112 9.216 3.072 17.408 9.728 22.528 18.432L491.52 337.408c1.024 1.536 2.56 2.56 4.608 3.072l203.776 8.704c16.384 0.512 31.232 10.752 37.888 26.112 6.656 15.36 4.096 33.28-6.144 46.08l-130.56 158.72c-1.536 1.536-1.536 3.584-1.024 5.632l54.784 199.168c3.584 12.288 1.024 25.6-6.144 36.352-7.68 10.752-19.456 17.92-32.256 18.944z" fill="#1296db" p-id="2725"></path><path d="M885.76 882.688c-8.192 0-15.872-3.072-22.016-8.704l-62.464-60.416-87.552 15.36c-1.024 0-4.608 0.512-5.632 0.512-10.752 0-20.48-5.12-26.624-14.336-5.632-8.704-6.144-19.968-1.024-29.184l40.448-75.776-41.984-74.752c-5.12-9.216-5.12-20.48 0.512-29.696 7.168-10.24 19.456-15.872 31.744-14.336l87.552 13.312 61.44-61.44c6.144-6.144 13.824-9.216 22.528-9.216 15.36-0.512 28.16 10.24 30.72 25.088l13.312 84.48 79.872 36.864c14.848 6.656 21.504 23.552 15.36 38.4-3.072 6.656-8.192 11.776-14.848 14.848l-78.848 38.4-12.288 84.48c-2.56 14.848-15.36 26.112-30.208 26.112z" fill="#1296db" p-id="2726"></path></svg></div>
+            <h3>宠物综艺IP</h3>
+            <p>打造国内首个专业化宠物全⺠赛事IP，创建可持续的宠物内容资产库。</p>
+            <!-- 添加图片 -->
+            <div class="card-image">
+              <img src="https://picsum.photos/300/200?random=7" alt="综艺IP示意图">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title">联系我们</h2>
+        <p class="section-subhead">期待与您交流，共同探索宠物未来。</p>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>联系方式</h3>
+            <div class="info-item">
+              <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="info-text">
+                <p>总部地址</p>
+                <p>上海市闵行区闵北路88弄6号楼7楼</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+              <div class="info-text">
+                <p>电话 / 商务合作</p>
+                <p>021-6680 1234  /  test@test.com</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon"><i class="fas fa-clock"></i></div>
+              <div class="info-text">
+                <p>工作时间</p>
+                <p>周一至周五 9:30 - 18:00</p>
+              </div>
+            </div>
+            <div class="social-links">
+              <a href="#" aria-label="微信"><i class="fab fa-weixin"></i></a>
+              <a href="#" aria-label="领英"><i class="fab fa-linkedin"></i></a>
+              <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="contact-image">
+            <h3>公司位置</h3>
+            <img src="C:\Users\HP\Desktop\新建文件夹\fw.png" class="company-photo" alt="公司位置示意">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p style="margin-bottom: 10px;">© 2026 中宠汇科技  ·  <a href="#home">回到顶部</a> </p>
+      <p style="font-size: 0.9rem; opacity: 0.8;"></p>
+    </div>
+  </footer>
+
+  <!-- 简约鼠标拖尾 JS (黑色半透明) -->
+  <script>
+    (function() {
+      const canvas = document.getElementById('magic-canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let particles = [];
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      // 添加粒子 - 黑色半透明，透明度约50% (0.4~0.6)
+      function addParticle(e) {
+        const x = e.clientX;
+        const y = e.clientY;
+        const alpha = 0.4 + Math.random() * 0.2; // 0.4 ~ 0.6
+        particles.push({
+          x, y,
+          size: Math.random() * 6 + 3,        // 3~9px
+          alpha: alpha,
+          color: '#000000',                    // 纯黑
+          vx: (Math.random() - 0.5) * 0.2,
+          vy: (Math.random() - 0.5) * 0.2,
+        });
+
+        if (particles.length > 70) {
+          particles.splice(0, 20);
+        }
+      }
+
+      let lastAdd = 0;
+      window.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastAdd > 20) {
+          addParticle(e);
+          lastAdd = now;
+        }
+      });
+
+      window.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        if (touch) {
+          const now = Date.now();
+          if (now - lastAdd > 25) {
+            addParticle(touch);
+            lastAdd = now;
+          }
+        }
+      }, { passive: false });
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.alpha -= 0.005;
+          p.size *= 0.99;
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.alpha <= 0.01 || p.size < 0.5) {
+            particles.splice(i, 1);
+            continue;
+          }
+
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      // 滚动时改变背景位置，实现颜色流动
+      window.addEventListener('scroll', function() {
+        const scrollY = window.scrollY;
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        const percent = scrollY / maxScroll; // 0 到 1
+        document.body.style.backgroundPosition = `50% ${percent * 100}%`;
+      });
+    })();
+  </script>
 </body>
 </html>
-alert('xxx')
-h2 {
-    color: red;
-}
