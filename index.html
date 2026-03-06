@@ -465,6 +465,52 @@
       z-index: 1;
       display: block;
     }
+    /* 微信二维码卡片 */
+.wechat-qr {
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 24px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 0 30px rgba(255,255,255,0.5), 0 8px 20px -8px rgba(0,40,80,0.2);
+  max-width: 200px;
+}
+
+.wechat-qr img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+}
+
+.wechat-qr p {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: #0f2b4b;
+  font-weight: 500;
+  text-shadow: 0 1px 4px rgba(255,255,255,0.5);
+}
+
+/* 图片说明文字 */
+.contact-image figure {
+  margin: 0;
+}
+
+.contact-image figcaption {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #1e3a5f;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 8px 16px;
+  border-radius: 40px;
+  border: 1px solid rgba(255,255,255,0.7);
+  display: inline-block;
+  width: auto;
+  backdrop-filter: blur(2px);
+}
   </style>
 </head>
 <body>
@@ -598,48 +644,80 @@
       </div>
     </section>
 
-    <!-- 联系我们 -->
-    <section id="contact" class="section">
-      <div class="container">
-        <h2 class="section-title">联系我们</h2>
-        <p class="section-subhead">期待与您交流，共同探索宠物未来。</p>
-        <div class="contact-grid">
-          <div class="contact-info">
-            <h3>联系方式</h3>
-            <div class="info-item">
-              <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-              <div class="info-text">
-                <p>总部地址</p>
-                <p>上海市闵行区闵北路88弄6号楼7楼</p>
-              </div>
-            </div>
-            <div class="info-item">
-              <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
-              <div class="info-text">
-                <p>电话 / 商务合作</p>
-                <p>021-6680 1234  /  test@test.com</p>
-              </div>
-            </div>
-            <div class="info-item">
-              <div class="info-icon"><i class="fas fa-clock"></i></div>
-              <div class="info-text">
-                <p>工作时间</p>
-                <p>周一至周五 9:30 - 18:00</p>
-              </div>
-            </div>
-            <div class="social-links">
-              <a href="#" aria-label="微信"><i class="fab fa-weixin"></i></a>
-              <a href="#" aria-label="领英"><i class="fab fa-linkedin"></i></a>
-              <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-          <div class="contact-image">
-            <h3>公司位置</h3>
-            <img src="./fw.png" class="company-photo" alt="公司位置示意">
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="section-title">联系我们</h2>
+    <p class="section-subhead">期待与您交流，共同探索宠物未来。</p>
+    <div class="contact-grid">
+      <!-- 左侧：联系信息 + 二维码 -->
+      <div class="contact-info">
+        <h3>联系方式</h3>
+        <!-- 地址 (不变) -->
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="info-text">
+            <p>总部地址</p>
+            <p>上海市闵行区闵北路88弄6号楼7楼</p>
           </div>
         </div>
+        <!-- 电话 (拆分) -->
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+          <div class="info-text">
+            <p>电话</p>
+            <p>021-6680 1234</p>
+          </div>
+        </div>
+        <!-- 商务邮箱 (新增独立条目) -->
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-envelope"></i></div>
+          <div class="info-text">
+            <p>商务合作邮箱</p>
+            <p>test@test.com</p>
+          </div>
+        </div>
+        <!-- 招聘合作 (新增) -->
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-briefcase"></i></div>
+          <div class="info-text">
+            <p>招聘合作</p>
+            <p>hr@zhongchonghui.com</p>
+          </div>
+        </div>
+        <!-- 工作时间 (不变) -->
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-clock"></i></div>
+          <div class="info-text">
+            <p>工作时间</p>
+            <p>周一至周五 9:30 - 18:00</p>
+          </div>
+        </div>
+
+        <!-- 社交链接 (不变) -->
+        <div class="social-links">
+          <a href="#" aria-label="微信"><i class="fab fa-weixin"></i></a>
+          <a href="#" aria-label="领英"><i class="fab fa-linkedin"></i></a>
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+
+        <!-- 新增：微信二维码区域 -->
+        <div class="wechat-qr">
+          <img src="./wechat_qr.png" alt="官方微信二维码">
+          <p>扫一扫 关注我们</p>
+        </div>
       </div>
-    </section>
+
+      <!-- 右侧：公司图片 + 说明 -->
+      <div class="contact-image">
+        <h3>公司位置</h3>
+        <figure>
+          <img src="./fw.png" class="company-photo" alt="公司位置示意">
+          <figcaption>上海闵行总部（示意图）</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
   </main>
 
   <footer class="footer">
